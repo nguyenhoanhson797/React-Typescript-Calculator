@@ -2,7 +2,9 @@
 import styles from './ScreenInfoField.module.css'
 import { useState, useEffect } from 'react'
 
-function ScreenInfo({error} : {error : boolean}){
+type PropsType = {error : boolean}
+
+function ScreenInfo({error} : PropsType){
     const [showError, setShowError] = useState<string>('')
 
     // ! Error handle

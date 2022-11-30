@@ -1,15 +1,17 @@
 import styles from './EditPopup.module.css'
-import { useEffect, useState } from 'react'
-import { EState } from '../../../interfaces'
+import { useState } from 'react'
+import { DispatchAction, InputEventTarget } from '../../../interfaces'
+import { HistoryItem } from '../../History/history.interface'
+import { PopupTypeSignal } from '../Popup'
 
 interface IProps {
-    history: EState["historyList"]
+    history: HistoryItem[]
     popupType: string
     itemIndex: number
-    setHistoryList: EState["setHistoryState"]
-    setShowPopup: EState["setStateBoolean"]
-    setSave: EState["setStateBoolean"]
-    setFocus: EState["setStateBoolean"]
+    setHistoryList: DispatchAction<HistoryItem[]>
+    setShowPopup: DispatchAction<boolean>
+    setSave: DispatchAction<boolean>
+    setFocus: DispatchAction<boolean>
 }
 
 function EditPopup({ history, setHistoryList, popupType, setShowPopup, setSave, itemIndex, setFocus } : IProps){
@@ -17,19 +19,19 @@ function EditPopup({ history, setHistoryList, popupType, setShowPopup, setSave, 
     const [editNoteValue, setEditNoteValue] = useState<string>('')
     
     // Get Result edit value
-    const handleEditResult = (e : EState["eventTarget"]) : void => {    
+    const handleEditResult = (e : InputEventTarget) : void => {
         setEditResultValue((e.target as HTMLInputElement).value);
     }
 
     // Get Note edit value
-    const handleEditNote = (e : EState["eventTarget"]) : void => {
+    const handleEditNote = (e : InputEventTarget) : void => {
         setEditNoteValue((e.target as HTMLInputElement).value);
     }
 
     // TODO Handle save edit
     const handleSave = () => {
 
-        // -----------------------------------------------------------------------------
+        //// _______________________________________________________________________________________
 
         if(editResultValue && !isNaN(+editResultValue)){
             history[itemIndex].result = +editResultValue
@@ -47,7 +49,7 @@ function EditPopup({ history, setHistoryList, popupType, setShowPopup, setSave, 
             setFocus(true)
         }
 
-        // --------------------------------------------------------------------------------
+        //// _______________________________________________________________________________________
 
         setEditResultValue('')
         setEditNoteValue('')
@@ -62,7 +64,7 @@ function EditPopup({ history, setHistoryList, popupType, setShowPopup, setSave, 
     }
 
     return(
-        <div className={`${styles.editPopup} ${popupType === 'editPopup' ? styles.show : styles.hide}`}>
+        <div className={`${styles.editPopup} ${popupType === PopupTypeSignal.Edit ? styles.show : styles.hide}`}>
             <div className={styles.title}> Edit item </div>
             <input id='editResultInput' type="number" className={`${styles.editBox} ${styles.resultBox}`} placeholder='Edit Result' onChange={handleEditResult} autoComplete="off" value={editResultValue}/>
             <input id='editNoteInput' className={`${styles.editBox} ${styles.noteBox}`} placeholder='Edit Note' onChange={handleEditNote} autoComplete="off" value={editNoteValue}/>

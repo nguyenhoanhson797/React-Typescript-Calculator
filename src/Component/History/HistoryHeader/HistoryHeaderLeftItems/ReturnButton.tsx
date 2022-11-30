@@ -1,8 +1,13 @@
-import { ReactComponent as Return } from '../../../../icon/keyboard-return.svg'
+import { ReactComponent as ReturnIcon } from '../../../../icon/keyboard-return.svg'
+import { DispatchAction } from '../../../../interfaces'
 import styles from './ReturnButton.module.css'
-import { EState } from '../../../../interfaces'
 
-function ReturnButton({setShow, setFocus} : {setShow : EState["setStateBoolean"], setFocus : EState["setStateBoolean"]}){
+interface IProps {
+    setShow : DispatchAction<boolean>,
+    setFocus : DispatchAction<boolean>,
+}
+
+function ReturnButton({setShow, setFocus} : IProps){
 
     const closeView = () => {
         setShow(false)
@@ -11,7 +16,7 @@ function ReturnButton({setShow, setFocus} : {setShow : EState["setStateBoolean"]
 
     return(
         <div className={styles.return} onClick={closeView}>
-            <Return/>
+            <ReturnIcon/>
         </div>
     )
 }

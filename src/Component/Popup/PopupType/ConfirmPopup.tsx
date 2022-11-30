@@ -1,16 +1,18 @@
+import { DispatchAction } from '../../../interfaces'
+import { HistoryItem } from '../../History/history.interface'
+import { PopupTypeSignal } from '../Popup'
 import styles from './ConfirmPopup.module.css'
-import { EState } from '../../../interfaces' 
 
 
 interface IProps {
-    history: EState["historyList"]
+    history: HistoryItem[]
     popupType: string
     itemIndex: number
-    setHistoryList: EState["setHistoryState"]
-    setHistory: EState["setHistoryState"]
-    setShowPopup: EState["setStateBoolean"]
-    setSave: EState["setStateBoolean"]
-    setFocus: EState["setStateBoolean"]
+    setHistoryList: DispatchAction<HistoryItem[]>
+    setHistory: DispatchAction<HistoryItem[]>
+    setShowPopup: DispatchAction<boolean>
+    setSave: DispatchAction<boolean>
+    setFocus: DispatchAction<boolean>
 }
 
 function ConfirmPopup({ history, setHistoryList, popupType, setShowPopup, setSave, itemIndex, setFocus, setHistory } : IProps){
@@ -42,7 +44,7 @@ function ConfirmPopup({ history, setHistoryList, popupType, setShowPopup, setSav
 
     return(
         <div>
-            <div className={`${styles.confirmPopup} ${popupType === 'confirmPopup' ? styles.show : styles.hide}`}>
+            <div className={`${styles.confirmPopup} ${popupType === PopupTypeSignal.Confirm ? styles.show : styles.hide}`}>
                 <div className={styles.title}> Delete this item? </div>
                 <div className={styles.confirmField}>
                     <button className={`${styles.button} ${styles.delete}`} onClick={handleDeleteOneItem}> Delete </button>
@@ -50,7 +52,7 @@ function ConfirmPopup({ history, setHistoryList, popupType, setShowPopup, setSav
                 </div>
             </div>
 
-            <div className={`${styles.confirmPopup} ${popupType === 'deleteAllPopup' ? styles.show : styles.hide}`}>
+            <div className={`${styles.confirmPopup} ${popupType === PopupTypeSignal.DeleteAll ? styles.show : styles.hide}`}>
                 <div className={styles.title}> Delete All Items? </div>
                 <div className={styles.confirmField}>
                     <button className={`${styles.button} ${styles.delete}`} onClick={handleDeleteAll}> Delete All </button>

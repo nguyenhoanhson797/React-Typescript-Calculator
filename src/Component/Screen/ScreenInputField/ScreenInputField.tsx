@@ -1,6 +1,8 @@
 import styles from './ScreenInputField.module.css'
 
-function ScreenInput({input} : {input : string[]}){
+type PropsType = {input : string[]}
+
+function ScreenInput({input} : PropsType){
 
     return(
         <div className={styles.numberContainer}> 

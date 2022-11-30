@@ -1,6 +1,11 @@
 import styles from './HistoryNote.module.css'
 
-function HistoryNote({ index, value } : {index : number , value : string}){
+interface IProps {
+    index : number,
+    value : string,
+}
+
+function HistoryNote({ index, value } : IProps){
 
 
     return(

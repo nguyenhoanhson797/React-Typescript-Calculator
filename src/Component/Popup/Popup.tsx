@@ -1,19 +1,26 @@
 import styles from './Popup.module.css'
 import EditPopup from './PopupType/EditPopup';
 import ConfirmPopup from './PopupType/ConfirmPopup';
-import { EState } from '../../interfaces'
+import { HistoryItem } from '../History/history.interface';
+import { DispatchAction } from '../../interfaces';
 
 interface IProps {
-    history: EState["historyList"]
+    history: HistoryItem[]
     showPopup: boolean
     show: boolean
     popupType: string
     itemIndex: number
-    setHistoryList: EState["setHistoryState"]
-    setHistory: EState["setHistoryState"]
-    setShowPopup: EState["setStateBoolean"]
-    setSave: EState["setStateBoolean"]
-    setFocus: EState["setStateBoolean"]
+    setHistoryList: DispatchAction<HistoryItem[]>
+    setHistory: DispatchAction<HistoryItem[]>
+    setShowPopup: DispatchAction<boolean>
+    setSave: DispatchAction<boolean>
+    setFocus: DispatchAction<boolean>
+}
+
+export enum PopupTypeSignal {
+    Edit = 'editPopup',
+    Confirm = 'confirmPopup',
+    DeleteAll = 'deleteAllPopup',
 }
 
 function Popup({ history, setHistoryList, showPopup, popupType, show, setShowPopup, setSave, itemIndex, setFocus, setHistory } : IProps){

@@ -3,14 +3,15 @@ import HistoryNote from "./HistoryListLeftItems/HistoryNote";
 import HistoryDeleteOneItem from "./HistoryListRightItems/HistoryDeleteOneItem";
 import HistoryEditButton from "./HistoryListRightItems/HistoryEditButton";
 import styles from './HistoryList.module.css'
-import { EState } from '../../../interfaces'
+import { DispatchAction } from "../../../interfaces";
+import { HistoryItem } from "../history.interface";
 
 interface IProps { 
     showPopup: boolean
-    setItemIndex: EState["setStateNumber"]
-    setShowPopup: EState["setStateBoolean"]
-    setPopupType: EState["setStateString"]
-    historyList: EState["historyList"]
+    setItemIndex: DispatchAction<number>
+    setShowPopup: DispatchAction<boolean>
+    setPopupType: DispatchAction<string>
+    historyList: HistoryItem[]
 }
 
 function HistoryList({ historyList, showPopup, setShowPopup, setPopupType, setItemIndex} : IProps){

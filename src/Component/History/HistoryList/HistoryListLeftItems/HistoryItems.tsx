@@ -1,10 +1,17 @@
 import styles from './HistoryItems.module.css'
 
-function HistoryItems ({ index, value } : {index: number, value : number}) {
+interface IProps {
+    index: number,
+    value : number,
+}
+
+function HistoryItems ({ index, value } : IProps) {
 
 
     return(
-        <p className={`${styles.historyItem} item-${index}`}> {value} </p>
+        <p className={`${styles.historyItem} item-${index}`}>
+            {value.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 2})}
+        </p>
     )
 }
 

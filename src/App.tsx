@@ -7,13 +7,17 @@ import History from './Component/History/History';
 import HistoryToggle from './Component/HistoryToggle/HistoryToggle';
 import Popup from './Component/Popup/Popup';
 import { useState, useEffect } from 'react'
-import { EState as IState } from './interfaces'
+import { HistoryItem } from './Component/History/history.interface';
+
+export enum LocalHistoryList {
+  Key = 'historyList'
+}
 
 function App() {
   
-  const getLocalItems = () : IState["historyList"] => {
-    const storageHistoryList = localStorage.getItem('historyList');
-    let refineHistoryList
+  const getLocalItems = () : HistoryItem[] => {
+    const storageHistoryList = localStorage.getItem(LocalHistoryList.Key);
+    let refineHistoryList : HistoryItem[]
 
     if (storageHistoryList){
       refineHistoryList = JSON.parse(storageHistoryList)
@@ -23,7 +27,7 @@ function App() {
 
     return refineHistoryList;
   }
-  
+
   const [show, setShow] = useState<boolean>(false);                    // show history screen
   const [showPopup, setShowPopup] = useState<boolean>(false);          // show pop-up
   const [popupType, setPopupType] = useState<string>('');              // Call pop-up type

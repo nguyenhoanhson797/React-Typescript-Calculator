@@ -1,17 +1,18 @@
 import styles from "./History.module.css";
 import HistoryHeader from "./HistoryHeader/HistoryHeader"
 import HistoryList from "./HistoryList/HistoryList"
-import { EState } from '../../interfaces'
+import { DispatchAction } from '../../interfaces'
+import { HistoryItem } from "./history.interface"
 
 interface IProps {
     show: boolean
     showPopup: boolean
-    setItemIndex: EState["setStateNumber"]
-    setShow: EState["setStateBoolean"]
-    setFocus: EState["setStateBoolean"]
-    setShowPopup: EState["setStateBoolean"]
-    setPopupType: EState["setStateString"]
-    historyList: EState["historyList"]
+    setItemIndex: DispatchAction<number>
+    setShow: DispatchAction<boolean>
+    setFocus: DispatchAction<boolean>
+    setShowPopup: DispatchAction<boolean>
+    setPopupType: DispatchAction<string>
+    historyList: HistoryItem[]
 }
 
 function History({ setItemIndex, show, setShow, historyList, setFocus, showPopup, setShowPopup, setPopupType } : IProps){

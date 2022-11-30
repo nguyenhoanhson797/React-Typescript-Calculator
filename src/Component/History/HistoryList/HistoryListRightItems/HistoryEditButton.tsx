@@ -1,11 +1,12 @@
 import {ReactComponent as Edit} from '../../../../icon/edit.svg'
-import { EState } from '../../../../interfaces'
+import { DispatchAction } from '../../../../interfaces'
+import { PopupTypeSignal } from '../../../Popup/Popup'
 
 interface IProps { 
     index: number
-    setItemIndex: EState["setStateNumber"]
-    setShowPopup: EState["setStateBoolean"]
-    setPopupType: EState["setStateString"]
+    setItemIndex: DispatchAction<number>
+    setShowPopup: DispatchAction<boolean>
+    setPopupType: DispatchAction<string>
 }
 
 function HistoryEditButton ({ index, setShowPopup, setPopupType, setItemIndex } : IProps) {
@@ -13,7 +14,7 @@ function HistoryEditButton ({ index, setShowPopup, setPopupType, setItemIndex } 
     // TODO Send edit history item event
     const handleEdit = (e : React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         setShowPopup(true)
-        setPopupType('editPopup')
+        setPopupType(PopupTypeSignal.Edit)
         setItemIndex(parseInt((e.target as HTMLDivElement).id.substr(4)))
     }
     // TODO Send edit history item event

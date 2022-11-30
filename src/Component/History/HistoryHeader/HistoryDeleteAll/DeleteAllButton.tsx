@@ -1,13 +1,19 @@
 import { ReactComponent as DeleteAll } from '../../../../icon/delete.svg'
+import { DispatchAction } from '../../../../interfaces'
+import { PopupTypeSignal } from '../../../Popup/Popup'
 import styles from './DeleteAllButton.module.css'
-import { EState } from '../../../../interfaces'
 
-function DeleteAllButton({setShowPopup, setPopupType} : {setShowPopup : EState["setStateBoolean"], setPopupType : EState["setStateString"]}){
+interface IProps {
+    setShowPopup : DispatchAction<boolean>,
+    setPopupType : DispatchAction<string>,
+}
+
+function DeleteAllButton({setShowPopup, setPopupType} : IProps){
 
     // TODO Delete all history
     const handleTrash = () => {
         setShowPopup(true)
-        setPopupType('deleteAllPopup')
+        setPopupType(PopupTypeSignal.DeleteAll)
     }
 
     return(
